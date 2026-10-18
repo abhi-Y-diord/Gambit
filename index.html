@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="Play chess against a simple computer opponent or a friend on the same device." />
+  <title>Gambit &middot; Play Chess</title>
+  <link rel="icon" href="assets/pieces/wn.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Mobile top bar -->
+    <header class="topbar">
+      <span class="brand">
+        <img class="brand__mark" src="assets/pieces/wn.svg" alt="" />
+        <span class="brand__name">Gambit</span>
+      </span>
+      <button class="btn btn--sm" id="topNewGame" type="button">New game</button>
+    </header>
+
+    <!-- Left sidebar -->
+    <aside class="sidebar">
+      <div class="brand brand--lg">
+        <img class="brand__mark" src="assets/pieces/wn.svg" alt="" />
+        <span class="brand__name">Gambit</span>
+      </div>
+
+      <section class="panel">
+        <h2 class="panel__title">Current game</h2>
+        <dl class="meta" id="gameMeta">
+          <div class="meta__row"><dt>Opponent</dt><dd id="metaOpponent">Computer</dd></div>
+          <div class="meta__row" id="metaDifficultyRow"><dt>Strength</dt><dd id="metaDifficulty">Medium</dd></div>
+          <div class="meta__row"><dt>Time</dt><dd id="metaTime">10 minutes</dd></div>
+        </dl>
+        <button class="btn btn--primary btn--block" id="sidebarNew" type="button">New game</button>
+      </section>
+
+      <section class="panel panel--quiet">
+        <h2 class="panel__title">Controls</h2>
+        <ul class="tips">
+          <li>Click a piece, then a highlighted square.</li>
+          <li>Or drag a piece to its destination.</li>
+          <li>Pawns can promote to queen, rook, bishop or knight.</li>
+        </ul>
+      </section>
+    </aside>
+
+    <!-- Board -->
+    <main class="board-area">
+      <div class="playerbar" id="playerTop" data-color="b"></div>
+      <div class="board" id="board" aria-label="Chess board"></div>
+      <div class="playerbar" id="playerBottom" data-color="w"></div>
+    </main>
+
+    <!-- Right panel -->
+    <aside class="side-panel">
+      <section class="panel panel--flush">
+        <div class="panel__head">
+          <h2 class="panel__title">Moves</h2>
+          <span class="chip" id="turnChip">White to move</span>
+        </div>
+        <div class="moves" id="moveList" tabindex="0" aria-label="Move list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <button class="btn" id="btnResign" type="button">Resign</button>
+          <button class="btn" id="btnFlip" type="button">Flip board</button>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <!-- Start screen -->
+  <div class="overlay overlay--show" id="startScreen" role="dialog" aria-modal="true" aria-labelledby="startTitle">
+    <div class="modal modal--start">
+      <button class="modal__close" id="startClose" type="button" aria-label="Close" hidden>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+      </button>
+
+      <img class="modal__mark" src="assets/pieces/wq.svg" alt="" />
+      <h2 class="modal__title" id="startTitle">Play chess</h2>
+      <p class="modal__sub">Choose an opponent, difficulty, and time control.</p>
+
+      <span class="field__label field__label--center">Opponent</span>
+      <div class="mode-list" id="startModeList">
+        <button class="mode" type="button" data-mode="computer">
+          <span class="mode__icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" rx="1" />
+              <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" />
+            </svg>
+          </span>
+          <span class="mode__text">
+            <strong>Play vs Computer</strong>
+            <small>You play White against an AI opponent</small>
+          </span>
+        </button>
+
+        <button class="mode" type="button" data-mode="friend">
+          <span class="mode__icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </span>
+          <span class="mode__text">
+            <strong>Play with a Friend</strong>
+            <small>Two players taking turns on this screen</small>
+          </span>
+        </button>
+      </div>
+
+      <div class="field" id="difficultyField">
+        <span class="field__label field__label--center">Computer strength</span>
+        <div class="segmented segmented--wide segmented--grid" id="startDifficultyGroup" role="group" aria-label="Computer strength">
+          <button class="seg" type="button" data-difficulty="easy">Easy</button>
+          <button class="seg" type="button" data-difficulty="medium">Medium</button>
+          <button class="seg" type="button" data-difficulty="hard">Hard</button>
+          <button class="seg" type="button" data-difficulty="extreme">Extremely hard</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field__label field__label--center">Time control</span>
+        <div class="segmented segmented--wide" id="startTimeGroup" role="group" aria-label="Time control">
+          <button class="seg" type="button" data-time="600">10 minutes</button>
+          <button class="seg" type="button" data-time="0">Unlimited</button>
+        </div>
+      </div>
+
+      <button class="btn btn--primary btn--block btn--lg" id="startPlay" type="button">Start game</button>
+    </div>
+  </div>
+
+  <!-- Promotion picker -->
+  <div class="overlay" id="promoModal" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
+    <div class="modal modal--promo">
+      <h2 class="modal__title modal__title--sm" id="promoTitle">Promote pawn to</h2>
+      <div class="promo-grid" id="promoGrid"></div>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="overlay" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="modal modal--result">
+      <div class="result-badge" id="resultBadge"></div>
+      <h2 class="modal__title" id="resultTitle">White wins</h2>
+      <p class="modal__sub" id="resultReason">by checkmate</p>
+      <div class="modal__actions">
+        <button class="btn btn--primary" id="btnRematch" type="button">Rematch</button>
+        <button class="btn" id="btnResultNew" type="button">New game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm -->
+  <div class="overlay" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="modal modal--confirm">
+      <h2 class="modal__title modal__title--sm" id="confirmTitle">Are you sure?</h2>
+      <p class="modal__sub" id="confirmText"></p>
+      <div class="modal__actions">
+        <button class="btn" id="confirmCancel" type="button">Cancel</button>
+        <button class="btn btn--danger" id="confirmOk" type="button">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner" id="loadError" hidden>
+    <strong>The chess engine could not be loaded.</strong>
+    <span>This game loads its rules from a CDN. Check your internet connection and reload the page.</span>
+  </div>
+
+  <p class="sr-only" id="liveRegion" aria-live="polite"></p>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.1/chess.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
