@@ -79,17 +79,22 @@ Then open <http://localhost:8000>.
 
 ```
 chess-game/
-├── index.html          # Page structure, overlays and script tags
-├── style.css           # Theme, layout, board squares, responsive rules
-├── script.js           # All game logic in one IIFE
+├── index.html              # Page structure, overlays and script tags
+├── style.css               # Theme, layout, board squares, responsive rules
+├── script.js               # All game logic, plus the embedded piece artwork
+├── .nojekyll               # Tells GitHub Pages to serve files as-is
 ├── assets/
-│   └── pieces/         # 12 SVG pieces (wp.svg, bn.svg, ...)
-└── README.md
+│   └── pieces/             # 12 source SVGs for the artwork (wp.svg, bn.svg, ...)
+└── tools/
+    └── embed-pieces.js     # Regenerates the artwork embedded in script.js
 ```
 
-Everything lives in three files. `script.js` is organised in sections: state,
-rendering, board interaction, game flow, clocks, the computer engine, and
-event wiring.
+Everything you deploy is in **`index.html`, `style.css` and `script.js`** — those
+three files are the whole site. `assets/` and `tools/` are development sources
+and are not needed at runtime.
+
+`script.js` is organised in sections: state, rendering, board interaction, game
+flow, clocks, the computer engine, and event wiring.
 
 ## How it works
 
@@ -104,6 +109,11 @@ event wiring.
 - **Coordinates** (a–h, 1–8) are drawn inside the edge squares and sized with
   CSS container queries, so they scale with the board.
 - **Clocks** start on the first move, not when the game begins.
+- **Piece artwork is embedded in `script.js`** as base64 SVG data URIs, so the
+  page makes no image requests and needs no asset folder. The 12 `.svg` files
+  in `assets/pieces/` are the editable source; run
+  `node tools/embed-pieces.js` to bake them back into `script.js` after any
+  change.
 
 ## Customising
 
@@ -113,14 +123,14 @@ event wiring.
 | Board colours            | `--sq-light` / `--sq-dark` (light `#eaf1f8`, dark `#5b8db8`) |
 | Computer strength        | the `DIFFICULTY` table near the top of `script.js`           |
 | Time controls            | the `data-time` buttons in the start screen                  |
-| Piece artwork            | replace the SVGs in `assets/pieces/`                         |
+| Piece artwork            | edit `assets/pieces/*.svg`, then `node tools/embed-pieces.js` |
 
 ### Making it fully offline
 
 Download `chess.min.js` (0.12.1) and the Inter font into the project, then
 point the `<script>` and `<link>` tags in `index.html` at the local copies.
 Nothing else needs to change — the game uses no `fetch`, no modules and no
-local storage.
+local storage, and the artwork is already embedded.
 
 ## Browser support
 
@@ -130,17 +140,19 @@ supported today.
 
 ## Deployment
 
-This is a pure static site — three files plus an `assets/` folder. It needs no
-Node, no build step and no server-side code, so **yes, it can be deployed on
-GitHub Pages**, and that is the easiest free option.
+This is a pure static site: **three files** (`index.html`, `style.css`,
+`script.js`) and nothing else. No Node, no build step, no server-side code and
+no image files to upload — the piece artwork is embedded in `script.js`. So
+**yes, it can be deployed on GitHub Pages**, and that is the easiest free
+option.
 
 ### Option 1 — GitHub Pages, no command line
 
 1. Create a new **public** repository on GitHub (private repos need a paid plan
    for Pages), for example `gambit`.
-2. On the new repo page choose **uploading an existing file**, then drag the
-   *contents* of the `chess-game` folder into the browser (not the folder
-   itself): `index.html`, `style.css`, `script.js`, `assets/` and this README.
+2. On the new repo page choose **uploading an existing file**, then drag in
+   these three files: `index.html`, `style.css` and `script.js`. (You can also
+   add this README if you like.) No folders are needed.
 3. Commit the upload.
 4. Go to **Settings → Pages**. Under *Build and deployment*, set **Source** to
    *Deploy from a branch*, pick branch **main** and folder **/ (root)**, then
@@ -176,12 +188,11 @@ Any static host works with zero changes, and most are even simpler than Pages
 
 ### Two things to know before you deploy
 
-- **Filenames are case-sensitive on the web.** Windows ignores case, Linux
-  hosts do not, and `index.html`, `style.css`, `script.js` and the SVG names in
-  `assets/pieces/` are all lowercase and referenced in lowercase. Upload them
-  exactly as they are and every link will resolve. A `.nojekyll` file is
-  already included in this folder so GitHub Pages serves the files as-is
-  instead of running them through Jekyll.
+- **You only need three files.** If you upload a folder and GitHub complains
+  that it can only take files, just skip it — `assets/` and `tools/` are
+  development sources that the deployed site never reads. (Keeping the
+  filenames `index.html`, `style.css` and `script.js` exactly lowercase does
+  matter: GitHub's servers are case-sensitive.)
 - **The two external dependencies load over the internet.** `chess.js` and the
   Inter font fetch over HTTPS, which works fine on Pages, Netlify and the rest.
   For a build that works with no connection at all, vendor those two files
