@@ -1,214 +1,195 @@
-# Gambit · Play Chess
+<div align="center">
 
-A complete chess game that runs entirely in the browser — no build step, no
-framework, no backend. Open `index.html` and play.
+# ♞ Gambit · Play Chess
 
-You can play against the computer at four strength levels or against a friend
-on the same device, with a real clock, full chess rules, and a clean board
-inspired by the big chess sites (own design, own name, no copied assets).
+**A complete chess game that runs entirely in your browser.**
+No build step. No framework. No backend. Just open and play.
+
+<br>
+
+[![Play Live](https://img.shields.io/badge/▶_PLAY_LIVE-abhi--y--diord.github.io/Gambit-5b8db8?style=for-the-badge&logo=githubpages&logoColor=white)](https://abhi-y-diord.github.io/Gambit/)
+
+<br>
+
+[![Live Demo](https://img.shields.io/website?url=https%3A%2F%2Fabhi-y-diord.github.io%2FGambit%2F&label=demo&up_message=online&style=flat-square&logo=githubpages)](https://abhi-y-diord.github.io/Gambit/)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![chess.js](https://img.shields.io/badge/chess.js-0.12.1-5b8db8?style=flat-square)](https://github.com/jhlywa/chess.js)
+[![No Dependencies to Install](https://img.shields.io/badge/build-none_needed-success?style=flat-square)](#-running-it)
+
+[![Stars](https://img.shields.io/github/stars/abhi-Y-diord/Gambit?style=flat-square&logo=github)](https://github.com/abhi-Y-diord/Gambit/stargazers)
+[![Forks](https://img.shields.io/github/forks/abhi-Y-diord/Gambit?style=flat-square&logo=github)](https://github.com/abhi-Y-diord/Gambit/network/members)
+[![Issues](https://img.shields.io/github/issues/abhi-Y-diord/Gambit?style=flat-square&logo=github)](https://github.com/abhi-Y-diord/Gambit/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/abhi-Y-diord/Gambit?style=flat-square&logo=github)](https://github.com/abhi-Y-diord/Gambit/commits/main)
+[![Repo Size](https://img.shields.io/github/repo-size/abhi-Y-diord/Gambit?style=flat-square&logo=github)](https://github.com/abhi-Y-diord/Gambit)
+
+<br>
+
+[**🎮 Play Now**](https://abhi-y-diord.github.io/Gambit/) &nbsp;·&nbsp;
+[**✨ Features**](#-features) &nbsp;·&nbsp;
+[**🤖 Engine**](#-computer-strengths) &nbsp;·&nbsp;
+[**🚀 Run Locally**](#-running-it) &nbsp;·&nbsp;
+[**🎨 Customise**](#-customising)
+
+</div>
 
 ---
 
-## Features
+## 📖 About
 
-- **Full chess rules** — castling, en passant, promotion (with a piece picker),
-  check, checkmate, stalemate, threefold repetition, the fifty-move rule and
-  insufficient material.
-- **Two opponents**
-  - *Play vs Computer* — a minimax engine with alpha–beta pruning, quiescence
-    search, a transposition table, killer/history move ordering and iterative
-    deepening.
-  - *Play with a Friend* — two players taking turns on this screen.
-- **Four computer strengths** — Easy, Medium, Hard and Extremely hard.
-- **Time controls** — 10 minutes per player, or unlimited. A clock reaching
-  zero loses the game (flag fall).
-- **Board interaction** — click a piece and then a square, or drag it with the
-  mouse or a finger. Legal targets show as dots, captures as rings.
-- **Clear feedback** — the last move is highlighted, the king is highlighted
-  when in check, and there is a small dot on every legal destination.
-- **Move list** in standard algebraic notation, with captured pieces and a
-  material counter next to each player.
-- **Controls** — Resign (with confirmation), New Game, Rematch and Flip Board.
-- **Responsive** — three columns on desktop, a single column on phones.
+**Gambit** is a fully playable chess game built with plain HTML, CSS and JavaScript. Play against the computer at four strength levels, or challenge a friend on the same device, with a real clock, complete chess rules, and a clean blue board with its own original design and name.
 
-## Computer strengths
+> 👉 **[Play it right now: abhi-y-diord.github.io/Gambit](https://abhi-y-diord.github.io/Gambit/)**
 
-| Level            | Search depth | Thinking time | Blunder chance | Quiescence |
-| ---------------- | ------------ | ------------- | -------------- | ---------- |
-| Easy             | 1            | 0.15 s        | 35 %           | off        |
-| Medium           | 2            | 0.5 s         | 5 %            | on         |
-| Hard             | 4            | 1.2 s         | 0 %            | on         |
-| Extremely hard   | 6            | 2.5 s         | 0 %            | on         |
+---
 
-The engine is deliberately **not** a full modern chess engine. It is a clean,
-readable minimax implementation with a piece-square-table evaluation — strong
-enough to punish loose play at the top level, but not a Grandmaster.
+## ✨ Features
 
-> **Note:** the top level thinks on the main thread for up to ~2.5 seconds per
-> move, so the page is briefly unresponsive while it is "thinking". Lower the
-> `time` budget in the `DIFFICULTY` table in `script.js` if you want snappier
-> play.
+| | Feature | Details |
+|---|---|---|
+| ♟️ | **Full chess rules** | Castling, en passant, promotion (with a piece picker), check, checkmate, stalemate, threefold repetition, fifty-move rule, insufficient material |
+| 🤖 | **Play vs Computer** | Minimax engine with alpha-beta pruning, quiescence search, transposition table, killer/history move ordering and iterative deepening |
+| 👥 | **Play with a Friend** | Two players taking turns on the same screen |
+| 🎚️ | **4 difficulty levels** | Easy, Medium, Hard and Extremely hard |
+| ⏱️ | **Time controls** | 10 minutes per player, or unlimited. A clock reaching zero loses the game |
+| 🖱️ | **Click or drag** | Click a piece then a square, or drag with a mouse or finger |
+| 💡 | **Clear feedback** | Legal targets shown as dots, captures as rings, last move highlighted, king highlighted when in check |
+| 📜 | **Move list** | Standard algebraic notation, with captured pieces and a material counter for each player |
+| 🎛️ | **Controls** | Resign (with confirmation), New Game, Rematch and Flip Board |
+| 📱 | **Responsive** | Three columns on desktop, a single column on phones |
 
-## Running it
+---
+
+## 🤖 Computer Strengths
+
+| Level | Search depth | Thinking time | Blunder chance | Quiescence |
+| :--- | :---: | :---: | :---: | :---: |
+| 🟢 Easy | 1 | 0.15 s | 35 % | off |
+| 🟡 Medium | 2 | 0.5 s | 5 % | on |
+| 🟠 Hard | 4 | 1.2 s | 0 % | on |
+| 🔴 Extremely hard | 6 | 2.5 s | 0 % | on |
+
+The engine is deliberately **not** a full modern chess engine. It is a clean, readable minimax implementation with a piece-square-table evaluation: strong enough to punish loose play at the top level, but not a Grandmaster.
+
+> [!NOTE]
+> The top level thinks on the main thread for up to ~2.5 seconds per move, so the page is briefly unresponsive while it is "thinking". Lower the `time` budget in the `DIFFICULTY` table in `script.js` for snappier play.
+
+---
+
+## 🚀 Running It
 
 ### Just play
 
-Double-click **`index.html`**. That is all — it opens in your browser and works
-straight from the file system (`file://`).
+Double-click **`index.html`**. It opens in your browser and works straight from the file system (`file://`).
 
 ### With a local server (optional)
 
-Any static server works, for example:
-
 ```bash
+# Clone the repository
+git clone https://github.com/abhi-Y-diord/Gambit.git
+cd Gambit
+
 # Python 3
 python -m http.server 8000
 
-# Node
+# or Node
 npx serve .
 ```
 
 Then open <http://localhost:8000>.
 
-> **Internet on first load:** the game pulls `chess.js` and the Inter font from
-> public CDNs over HTTPS. If you are offline, a small banner explains why the
-> board did not start. To run fully offline, see *Making it fully offline*
-> below.
+> [!IMPORTANT]
+> **Internet on first load:** the game pulls `chess.js` and the Inter font from public CDNs over HTTPS. If you are offline, a small banner explains why the board did not start. See [Making it fully offline](#making-it-fully-offline) below.
 
-## Project structure
+---
 
-```
-chess-game/
-├── index.html              # Page structure, overlays and script tags
-├── style.css               # Theme, layout, board squares, responsive rules
-├── script.js               # All game logic, plus the embedded piece artwork
-├── .nojekyll               # Tells GitHub Pages to serve files as-is
-├── assets/
-│   └── pieces/             # 12 source SVGs for the artwork (wp.svg, bn.svg, ...)
-└── tools/
-    └── embed-pieces.js     # Regenerates the artwork embedded in script.js
+## 🗂️ Project Structure
+
+```text
+Gambit/
+├── index.html      # Page structure, overlays and script tags
+├── style.css       # Theme, layout, board squares, responsive rules
+├── script.js       # All game logic, plus the embedded piece artwork
+├── .nojekyll       # Tells GitHub Pages to serve files as-is
+└── README.md
 ```
 
-Everything you deploy is in **`index.html`, `style.css` and `script.js`** — those
-three files are the whole site. `assets/` and `tools/` are development sources
-and are not needed at runtime.
+`script.js` is organised in sections: state, rendering, board interaction, game flow, clocks, the computer engine, and event wiring.
 
-`script.js` is organised in sections: state, rendering, board interaction, game
-flow, clocks, the computer engine, and event wiring.
+---
 
-## How it works
+## ⚙️ How It Works
 
-- **`chess.js`** (v0.12.1, loaded from cdnjs) owns the rules: it validates
-  moves, tracks history, and detects check, mate, draws and repetition. The
-  older 0.12.x build is used on purpose — it exposes a plain global `Chess`
-  that works with a normal `<script src>` from `file://`. The newer 1.x builds
-  are ESM/CJS only and will not load this way.
-- **Rendering** rebuilds the 64 squares, then paints selection, target and
-  check highlights without a full re-render. Moves animate with the Web
-  Animations API (a FLIP-style animation).
-- **Coordinates** (a–h, 1–8) are drawn inside the edge squares and sized with
-  CSS container queries, so they scale with the board.
-- **Clocks** start on the first move, not when the game begins.
-- **Piece artwork is embedded in `script.js`** as base64 SVG data URIs, so the
-  page makes no image requests and needs no asset folder. The 12 `.svg` files
-  in `assets/pieces/` are the editable source; run
-  `node tools/embed-pieces.js` to bake them back into `script.js` after any
-  change.
+- **Rules:** [`chess.js`](https://github.com/jhlywa/chess.js) (v0.12.1, loaded from cdnjs) validates moves, tracks history, and detects check, mate, draws and repetition. The 0.12.x build is used on purpose, because it exposes a plain global `Chess` that works with a normal `<script src>` from `file://`. Newer 1.x builds are ESM/CJS only and will not load this way.
+- **Rendering:** the 64 squares are rebuilt, then selection, target and check highlights are painted without a full re-render. Moves animate with the Web Animations API (FLIP-style).
+- **Coordinates:** the a–h and 1–8 labels sit inside the edge squares and scale with the board using CSS container queries.
+- **Clocks:** they start on the first move, not when the game begins.
+- **Piece artwork:** embedded in `script.js` as base64 SVG data URIs, so the page makes no image requests.
 
-## Customising
+---
 
-| What                     | Where                                                       |
-| ------------------------ | ----------------------------------------------------------- |
-| Colours                  | CSS custom properties at the top of `style.css`              |
-| Board colours            | `--sq-light` / `--sq-dark` (light `#eaf1f8`, dark `#5b8db8`) |
-| Computer strength        | the `DIFFICULTY` table near the top of `script.js`           |
-| Time controls            | the `data-time` buttons in the start screen                  |
-| Piece artwork            | edit `assets/pieces/*.svg`, then `node tools/embed-pieces.js` |
+## 🎨 Customising
+
+| What | Where |
+| :--- | :--- |
+| Colours | CSS custom properties at the top of `style.css` |
+| Board colours | `--sq-light` / `--sq-dark` (light `#eaf1f8`, dark `#5b8db8`) |
+| Computer strength | the `DIFFICULTY` table near the top of `script.js` |
+| Time controls | the `data-time` buttons in the start screen |
 
 ### Making it fully offline
 
-Download `chess.min.js` (0.12.1) and the Inter font into the project, then
-point the `<script>` and `<link>` tags in `index.html` at the local copies.
-Nothing else needs to change — the game uses no `fetch`, no modules and no
-local storage, and the artwork is already embedded.
+Download `chess.min.js` (0.12.1) and the Inter font into the project, then point the `<script>` and `<link>` tags in `index.html` at the local copies. Nothing else needs to change: the game uses no `fetch`, no modules and no local storage.
 
-## Browser support
+---
 
-Any modern browser (Chrome, Edge, Firefox, Safari). The layout uses CSS Grid,
-container queries and the Web Animations API, all of which are widely
-supported today.
+## 🌐 Browser Support
 
-## Deployment
+Any modern browser: Chrome, Edge, Firefox, Safari. The layout uses CSS Grid, container queries and the Web Animations API, all widely supported today.
 
-This is a pure static site: **three files** (`index.html`, `style.css`,
-`script.js`) and nothing else. No Node, no build step, no server-side code and
-no image files to upload — the piece artwork is embedded in `script.js`. So
-**yes, it can be deployed on GitHub Pages**, and that is the easiest free
-option.
+---
 
-### Option 1 — GitHub Pages, no command line
+## ☁️ Deployment
 
-1. Create a new **public** repository on GitHub (private repos need a paid plan
-   for Pages), for example `gambit`.
-2. On the new repo page choose **uploading an existing file**, then drag in
-   these three files: `index.html`, `style.css` and `script.js`. (You can also
-   add this README if you like.) No folders are needed.
-3. Commit the upload.
-4. Go to **Settings → Pages**. Under *Build and deployment*, set **Source** to
-   *Deploy from a branch*, pick branch **main** and folder **/ (root)**, then
-   **Save**.
-5. Wait a minute or two. Your game is live at
-   `https://<your-username>.github.io/<repo-name>/`.
+Gambit is a pure static site made of `index.html`, `style.css` and `script.js`. It is deployed on **GitHub Pages**:
 
-### Option 2 — GitHub Pages with git
+1. Push the files to a public repository.
+2. Go to **Settings → Pages**.
+3. Set **Source** to *Deploy from a branch*, choose **main** and **/ (root)**, then **Save**.
+4. Your game goes live at `https://<your-username>.github.io/<repo-name>/`.
 
-```bash
-cd chess-game
-git init
-git add .
-git commit -m "Gambit chess"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<repo-name>.git
-git push -u origin main
-```
+It also works unchanged on Netlify, Cloudflare Pages, Vercel, Surge and Render. No custom headers, redirects or build command needed.
 
-Then enable Pages exactly as in step 4 above.
+---
 
-### Option 3 — Other free hosts
+## 🗺️ Roadmap Ideas
 
-Any static host works with zero changes, and most are even simpler than Pages
-(usually drag-and-drop with no Git at all):
+- [ ] Move the engine into a Web Worker so the page never freezes while thinking
+- [ ] Undo / takeback
+- [ ] Save and resume games
+- [ ] Export games as PGN
+- [ ] Sound effects for moves and captures
 
-| Host                   | Notes                                                          |
-| ---------------------- | -------------------------------------------------------------- |
-| **Netlify Drop**       | Drag the folder onto <https://app.netlify.com/drop>. Instant.   |
-| **Cloudflare Pages**   | Connect a Git repo or upload directly; generous free tier.      |
-| **Vercel**             | Import the repo, no framework preset needed.                    |
-| **Surge / Render**     | Simple static hosting via CLI or Git.                           |
+---
 
-### Two things to know before you deploy
+## 🙏 Credits
 
-- **You only need three files.** If you upload a folder and GitHub complains
-  that it can only take files, just skip it — `assets/` and `tools/` are
-  development sources that the deployed site never reads. (Keeping the
-  filenames `index.html`, `style.css` and `script.js` exactly lowercase does
-  matter: GitHub's servers are case-sensitive.)
-- **The two external dependencies load over the internet.** `chess.js` and the
-  Inter font fetch over HTTPS, which works fine on Pages, Netlify and the rest.
-  For a build that works with no connection at all, vendor those two files
-  locally as described in *Making it fully offline* above.
+- **Chess rules:** [chess.js](https://github.com/jhlywa/chess.js) by Jeff Hlywa (BSD-2-Clause)
+- **Piece artwork:** the *cburnett* set by Colin M. L. Burnett, taken from [Lichess](https://lichess.org) and licensed under **GPLv2+**. If you redistribute this project, keep this attribution and respect that licence.
+- **Typeface:** [Inter](https://fonts.google.com/specimen/Inter) by Rasmus Andersson (SIL Open Font License)
 
-None of these hosts need custom headers, redirects or a build command.
+The name, logo, layout and styling of this project are original. It is not affiliated with, and does not copy assets from, chess.com or any other site.
 
-## Credits
+---
 
-- Chess rules: [chess.js](https://github.com/jhlywa/chess.js) by Jeff Hlywa
-  (BSD-2-Clause).
-- Piece artwork: the **cburnett** set by Colin M. L. Burnett, taken from
-  [Lichess](https://lichess.org) and licensed under the **GPLv2+**. If you
-  redistribute this project, keep this attribution and respect that licence.
-- Typeface: [Inter](https://fonts.google.com/specimen/Inter) by Rasmus
-  Andersson, licensed under the SIL Open Font License.
+<div align="center">
 
-The name, logo, layout and styling of this project are original. It is not
-affiliated with, and does not copy assets from, chess.com or any other site.
+### Built by [Abhishek Yadav](https://github.com/abhi-Y-diord)
+
+[![GitHub](https://img.shields.io/badge/GitHub-abhi--Y--diord-181717?style=for-the-badge&logo=github)](https://github.com/abhi-Y-diord)
+[![Play](https://img.shields.io/badge/Play-Gambit-5b8db8?style=for-the-badge&logo=githubpages&logoColor=white)](https://abhi-y-diord.github.io/Gambit/)
+
+⭐ **If you enjoyed the game, consider giving it a star!** ⭐
+
+</div>
